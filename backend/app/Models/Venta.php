@@ -21,4 +21,8 @@ class Venta extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

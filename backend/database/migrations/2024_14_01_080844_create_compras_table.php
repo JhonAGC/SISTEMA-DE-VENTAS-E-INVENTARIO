@@ -20,6 +20,9 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('proveedors')
                 ->cascadeOnUpdate();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users');
 
             $table->decimal('total', 8, 2)->default(0);
             $table->integer('tipo')->default(1);

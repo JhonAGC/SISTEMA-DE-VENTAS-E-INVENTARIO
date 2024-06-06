@@ -439,6 +439,7 @@ export default {
       categorias: [],
       carrito: [],
       proveedors: [],
+      saldoCaja: 0,
 
       item: {
         articulo: {
@@ -499,11 +500,13 @@ export default {
           this.GET_DATA("categorias"),
           this.GET_DATA("articulos"),
           this.GET_DATA("proveedors"),
+          this.GET_DATA("cajas"),
         ]).then((v) => {
           this.marcas = v[0];
           this.categorias = v[1];
           this.articulos = v[2];
           this.proveedors = v[3];
+          this.saldoCaja = v[4][0].total;
         });
       } catch (e) {
         console.log(e);
@@ -566,12 +569,30 @@ export default {
         return; // Detener la ejecución del método
       }
 
+      if (this.totalCarrito > this.saldoCaja) {
+        this.$swal.fire({
+          title: "Error",
+          text: "Saldo insuficiente en caja para realizar la compra.",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+        this.load = false; // Detener el loader si la validación falla
+        return; // Detener la ejecución del método
+      }
+
       try {
+        const user = JSON.parse(localStorage.getItem("userAuth"));
+        if (!user) {
+          throw new Error("User not found in localStorage");
+        }
+        console.log("User ID from localStorage:", user.id); // Debugging log
+
         const operacion = {
           total: this.totalCarrito,
           tipo: 1,
           motivo: "",
           proveedor_id: this.proveedor,
+          user_id: user.id,
           caja_id: this.user.caja_id,
           carrito: this.carrito,
         };

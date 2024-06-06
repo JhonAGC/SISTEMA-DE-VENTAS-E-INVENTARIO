@@ -665,6 +665,12 @@ export default {
       }
 
       try {
+        const user = JSON.parse(localStorage.getItem("userAuth"));
+        if (!user) {
+          throw new Error("User not found in localStorage");
+        }
+        console.log("User ID from localStorage:", user.id); // Debugging log
+
         const operacion = {
           total: this.totalCarrito,
           tipo: 1,
@@ -722,8 +728,6 @@ export default {
     },
   },
   mounted() {
-    let user = localStorage.getItem("userAuth");
-    this.user = JSON.parse(user);
     this.$nextTick(async () => {
       try {
         await this.Datos();

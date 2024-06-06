@@ -21,7 +21,7 @@
                     <th class="py-0 px-1"></th>
                   </thead>
                   <tbody>
-                    <tr v-for="(m, i) in list">
+                    <tr v-for="(m, i) in list" :key="m.id">
                       <td class="py-0 px-1">{{ i + 1 }}</td>
                       <td class="py-0 px-1">{{ m.nombre }}</td>
                       <td class="py-0 px-1">{{ m.email }}</td>

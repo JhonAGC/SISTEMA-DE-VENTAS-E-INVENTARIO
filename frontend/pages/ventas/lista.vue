@@ -4,7 +4,6 @@
     <AdminTemplate :page="page" :modulo="modulo">
       <div slot="body">
         <div class="row justify-content-end">
-
           <div class="col-12">
             <div class="card">
               <div class="card-body">
@@ -18,15 +17,16 @@
                     <th class="py-0 px-1"></th>
                   </thead>
                   <tbody>
-                    <tr v-for="(m, i) in list">
+                    <tr v-for="(m, i) in list" :key="m.id">
                       <td class="py-0 px-1">{{ i + 1 }}</td>
                       <td class="py-0 px-1">{{ m.fecha }}</td>
-                      <td class="py-0 px-1">{{ m.cliente.nombre}} {{m.cliente.apePaterno}}</td>
-                      <td class="py-0 px-1">{{ m.cliente.dni}} </td>
+                      <td class="py-0 px-1">
+                        {{ m.cliente.nombre }} {{ m.cliente.apePaterno }}
+                      </td>
+                      <td class="py-0 px-1">{{ m.cliente.dni }}</td>
                       <td class="py-0 px-1">{{ m.total }}</td>
                       <td class="py-0 px-1">
                         <div class="btn-group">
-
                           <nuxtLink
                             :to="url_editar + m.id"
                             class="btn btn-info btn-sm py-1 px-2"
@@ -40,7 +40,7 @@
                             class="btn btn-danger btn-sm py-1 px-2"
                           >
                             <i class="fas fa-print"></i>
-                        </a>
+                          </a>
                           <button
                             type="button"
                             @click="ImprimirVenta(m)"
@@ -85,9 +85,7 @@ export default {
       apiUrl: "ventas",
       page: "Ventas",
       modulo: "Lista de ventas",
-      sucursal:{
-
-      },
+      sucursal: {},
       url_editar: "/ventas/invoice/",
     };
   },
@@ -127,17 +125,23 @@ export default {
           }
         });
     },
-    async ImprimirVenta(venta){
-      let sucursal = this.sucursal
-      sucursal.venta = venta
-      const res = await this.$printer.$post(sucursal.impresora_url+"venta",sucursal);
-      console.log(res)
-    }
+    async ImprimirVenta(venta) {
+      let sucursal = this.sucursal;
+      sucursal.venta = venta;
+      const res = await this.$printer.$post(
+        sucursal.impresora_url + "venta",
+        sucursal
+      );
+      console.log(res);
+    },
   },
   mounted() {
     this.$nextTick(async () => {
       try {
-        await Promise.all([this.GET_DATA(this.apiUrl),this.GET_DATA('sucursals'),]).then((v) => {
+        await Promise.all([
+          this.GET_DATA(this.apiUrl),
+          this.GET_DATA("sucursals"),
+        ]).then((v) => {
           this.list = v[0];
           this.sucursals = v[1];
           if (this.sucursals.length > 0) {

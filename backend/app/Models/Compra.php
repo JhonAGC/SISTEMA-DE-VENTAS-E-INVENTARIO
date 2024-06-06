@@ -19,4 +19,8 @@ class Compra extends Model
     {
         return $this->belongsTo(Proveedor::class);
     }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

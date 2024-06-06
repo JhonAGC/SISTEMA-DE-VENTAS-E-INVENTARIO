@@ -18,7 +18,7 @@ class CompraController extends Controller
      */
     public function index()
     {
-        $compra = Compra::with(['Proveedor'])->where('estado', 1)->get();
+        $compra = Compra::with(['Proveedor', 'User'])->where('estado', 1)->get();
         $list = [];
         foreach ($compra as $m) {
             $list[] = $this->show($m);
@@ -38,6 +38,7 @@ class CompraController extends Controller
         $compra->total = $request->total;
         $compra->tipo = $request->tipo;
         $compra->proveedor_id = $request->proveedor_id;
+        $compra->user_id = $request->user_id;
         $compra->motivo = $request->motivo;
         $compra->save();
         $CajaCompra = new CajaCompra();
@@ -78,13 +79,15 @@ class CompraController extends Controller
      */
     public function show(Compra $compra)
     {
+        $compra->load('proveedor', 'user');
         $compra->compra_inventarios = $compra->CompraInventarios()->with(['Inventario' => function ($i) {
             $i->with(['Articulo' => function ($a) {
                 $a->with(['Marca', 'Categoria', 'Medida']);
             }]);
         }])->get();
         $compra->fecha = $compra->created_at->format('Y-m-d');
-        $compra->proveedor = $compra->Proveedor;
+        /* $compra->proveedor = $compra->Proveedor;
+        $compra->user = $compra->User; */
         return $compra;
     }
 

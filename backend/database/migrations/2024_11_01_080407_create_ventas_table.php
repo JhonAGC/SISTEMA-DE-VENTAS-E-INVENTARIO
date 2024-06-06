@@ -20,6 +20,9 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('clientes');
 
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users');
 
             $table->decimal('total', 8, 2)->default(0);
             $table->decimal('pago', 8, 2)->default(0);

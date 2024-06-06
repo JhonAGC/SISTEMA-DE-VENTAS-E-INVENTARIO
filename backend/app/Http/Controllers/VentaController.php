@@ -7,6 +7,7 @@ use App\Models\CajaVenta;
 use App\Models\VentaInventario;
 use App\Models\Inventario;
 use App\Models\Sucursal;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -18,17 +19,29 @@ class VentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $venta = Venta::with(['Cliente'])->where('estado', 1)->get();
+        $ventas = Venta::with('Cliente', 'User')
+            ->where('estado', 1);
 
-        $list = [];
-        foreach ($venta as $m) {
-
-            $list[] = $this->show($m);
+        // Implementar filtros de búsqueda adicionales si es necesario
+        // Ejemplo: filtrar por rango de fechas
+        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+            $ventas->whereBetween('created_at', [$request->fecha_inicio, $request->fecha_fin]);
         }
-        return $list;
+
+        // Paginación (opcional)
+        if ($request->has('per_page')) {
+            $ventas = $ventas->paginate($request->per_page);
+        } else {
+            $ventas = $ventas->get();
+        }
+
+        return $ventas;
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -40,6 +53,7 @@ class VentaController extends Controller
     {
         $venta = new Venta();
         $venta->cliente_id = $request->cliente_id;
+        $venta->user_id = $request->user_id;
         $venta->total = $request->total;
         $venta->pago = $request->pago;
         $venta->cambio = $request->cambio;
@@ -87,6 +101,7 @@ class VentaController extends Controller
      */
     public function show(Venta $venta)
     {
+        $venta->load('cliente', 'user');
         $venta->venta_inventarios = $venta->VentaInventarios()->with(['Inventario' => function ($i) {
             $i->with(['Articulo' => function ($a) {
                 $a->with(['Marca', 'Categoria', 'Medida']);

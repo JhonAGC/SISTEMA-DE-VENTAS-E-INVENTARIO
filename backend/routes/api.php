@@ -13,6 +13,8 @@ Route::get('/dashboard', 'DashboardController@info');
 Route::get('/reportes/ventas/{venta}', 'VentaController@pdf');
 Route::apiResource('/cajaMovimientos', 'CajaMovimientoController');
 
+
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

@@ -8,6 +8,7 @@ use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     /**
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::where('estado',1)->get();
+        return User::where('estado', 1)->get();
     }
 
     /**
@@ -50,8 +51,7 @@ class UserController extends Controller
 
 
 
-            return $user;
-
+        return $user;
     }
 
     /**
@@ -66,10 +66,9 @@ class UserController extends Controller
         $user->nombre = $request->nombre;
         $user->email = $request->email;
         $user->username = $request->username;
-        if(isset($request->password)){
-            if(!empty($request->password)){
+        if (isset($request->password)) {
+            if (!empty($request->password)) {
                 $user->password = Hash::make($request->password);
-
             }
         }
         $user->save();
@@ -90,10 +89,10 @@ class UserController extends Controller
     }
     public function login(LoginFormRequest $request)
     {
-        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password],false)){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], false)) {
             $user = Auth::user();
             $caja = $user->Caja;
-            if(empty($caja)){
+            if (empty($caja)) {
 
                 $caja_nueva = new Caja();
                 $caja_nueva->user_id = $user->id;
@@ -106,8 +105,8 @@ class UserController extends Controller
             }
             $user->caja_id = $caja->id;
             return $user;
-        }else{
-            return response()->json(['errors'=>['login'=>['Los datos no son validos']]]);
+        } else {
+            return response()->json(['errors' => ['login' => ['Los datos no son validos']]]);
         }
     }
 }
