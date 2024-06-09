@@ -604,6 +604,7 @@ export default {
     },
     AddCarrito(articulo) {
       let id = articulo.id;
+
       let buscarRegistro = this.carrito.filter((i) => i.articulo.id == id);
       if (buscarRegistro.length > 0) {
         let indice = this.carrito.findIndex((i) => i.articulo.id == id);
@@ -662,6 +663,21 @@ export default {
         });
         this.load = false; // Detener el loader si la validación falla
         return; // Detener la ejecución del método
+      }
+
+      // Validación para asegurar que cada artículo en el carrito tenga suficiente stock
+      for (let item of this.carrito) {
+        if (item.cantidad > item.stock) {
+          this.$swal.fire({
+            title: "Error",
+            text: `El artículo "${item.articulo.nombre}" no tiene suficiente stock.`,
+            showDenyButton: false,
+            showCancelButton: false,
+            confirmButtonText: "Ok",
+          });
+          this.load = false; // Detener el loader si la validación falla
+          return; // Detener la ejecución del método
+        }
       }
 
       try {
