@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Boleta;
 use App\Models\Venta;
 use App\Models\CajaVenta;
 use App\Models\VentaInventario;
 use App\Models\Inventario;
 use App\Models\Sucursal;
 use App\Models\Cliente;
+use App\Models\Factura;
+use App\Models\Metodo;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -22,8 +25,15 @@ class VentaController extends Controller
 
     public function index(Request $request)
     {
-        $ventas = Venta::with('Cliente', 'User')
-            ->where('estado', 1);
+        $ventas = Venta::where('estado', 1)->get();
+        $list = [];
+        foreach ($ventas as $m) {
+
+            $list[] = $this->show($m);
+        }
+        return $list;
+
+
 
         // Implementar filtros de búsqueda adicionales si es necesario
         // Ejemplo: filtrar por rango de fechas
@@ -36,6 +46,10 @@ class VentaController extends Controller
             $ventas = $ventas->paginate($request->per_page);
         } else {
             $ventas = $ventas->get();
+        }
+
+        foreach ($ventas as $venta) {
+            $venta->url_pdf = url('api/reportes/ventas/' . $venta->id);
         }
 
         return $ventas;
@@ -57,6 +71,7 @@ class VentaController extends Controller
         $venta->total = $request->total;
         $venta->pago = $request->pago;
         $venta->cambio = $request->cambio;
+        $venta->metodo_id = $request->metodo_id;
         $venta->tipo = $request->tipo;
 
         /* $venta->motivo = $request->motivo; */
@@ -101,12 +116,15 @@ class VentaController extends Controller
      */
     public function show(Venta $venta)
     {
-        $venta->load('cliente', 'user');
+
+        $venta->load('cliente', 'user', 'metodo');
         $venta->venta_inventarios = $venta->VentaInventarios()->with(['Inventario' => function ($i) {
             $i->with(['Articulo' => function ($a) {
                 $a->with(['Marca', 'Categoria', 'Medida']);
             }]);
         }])->get();
+
+
         $venta->fecha = $venta->created_at->format('Y-m-d');
         $venta->url_pdf = url('api/reportes/ventas/' . $venta->id);
         return $venta;
@@ -114,9 +132,14 @@ class VentaController extends Controller
     public function pdf(Venta $venta)
     {
         $sucursal = Sucursal::all()->first();
+        $boleta = Boleta::where('venta_id', $venta->id)->get();
+        $factura = Factura::where('venta_id', $venta->id)->get();
+
 
         $venta = $this->show($venta);
         $venta->sucursal = $sucursal;
+        $venta->boleta = $boleta;
+        $venta->factura = $factura;
         $pdf = PDF::loadView('reports.venta', ["venta" => $venta]);
         return $pdf->stream();
     }

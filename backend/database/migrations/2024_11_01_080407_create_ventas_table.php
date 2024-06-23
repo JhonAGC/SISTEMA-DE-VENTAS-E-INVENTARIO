@@ -24,10 +24,14 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('users');
 
+            $table->foreignId('metodo_id')
+                ->nullable()
+                ->constrained('metodos');
+
             $table->decimal('total', 8, 2)->default(0);
             $table->decimal('pago', 8, 2)->default(0);
             $table->decimal('cambio', 8, 2)->default(0);
-            $table->integer('tipo')->default(1);
+            $table->char('tipo', 1)->default('B');
             $table->integer('estado')->default(1);
             $table->timestamps();
         });

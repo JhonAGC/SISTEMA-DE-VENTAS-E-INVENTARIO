@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Metodo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'apePaterno', 'apeMaterno', 'dni'];
+    protected $fillable = ['nombre'];
 
-    public function ventas()
+    public function metodos()
     {
         return $this->hasMany(Venta::class);
     }

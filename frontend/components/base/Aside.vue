@@ -108,6 +108,12 @@
                 </nuxtLink>
               </li>
               <li class="nav-item">
+                <nuxtLink class="nav-link" to="/configuracion/metodos">
+                  <span class="sidenav-mini-icon"> M </span>
+                  <span class="sidenav-normal"> Metodos de pago </span>
+                </nuxtLink>
+              </li>
+              <li class="nav-item">
                 <nuxtLink class="nav-link" to="/configuracion/articulos">
                   <span class="sidenav-mini-icon"> A </span>
                   <span class="sidenav-normal"> Articulos </span>

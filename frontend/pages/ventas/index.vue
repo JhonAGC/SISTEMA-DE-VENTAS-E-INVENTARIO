@@ -405,6 +405,45 @@
                       </select>
                     </div>
                   </div>
+                  <!-- segundo boton -->
+                  <div class="row">
+                    <div class="col-6 text-start">
+                      <label for="">Metodo</label>
+                      <select
+                        v-model="metodo"
+                        name=""
+                        id=""
+                        class="form-control"
+                      >
+                        <option value="all" disabled class="text-dark">
+                          Metodos
+                        </option>
+                        <option
+                          class="text-dark"
+                          v-for="m in metodos"
+                          :key="m.id"
+                          :value="m.id"
+                        >
+                          {{ m.nombre }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-6 text-start">
+                      <label for="">Comprobante</label>
+                      <select
+                        name=""
+                        v-model="comprobante_tipo"
+                        id=""
+                        class="form-control"
+                      >
+                        <option value="all" disabled class="text-dark">
+                          seleccione
+                        </option>
+                        <option value="B">Boleta</option>
+                        <option value="F">Factura</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <a
                   href="javascript:void(0);"
@@ -515,17 +554,20 @@ export default {
       marca: "all",
       categoria: "all",
       cliente: "all",
+      metodo: "all",
       load: true,
       image: true,
       modalEdit: false,
       articulos: [],
       marcas: [],
+      metodos: [],
       impresion: 1,
       impreso_tipo: 1,
       categorias: [],
       carrito: [],
       sucursals: [],
       clientes: [],
+      comprobante_tipo: "all",
       item: {
         articulo: {
           nombre: "",
@@ -588,12 +630,14 @@ export default {
           this.GET_DATA("inventarios"),
           this.GET_DATA("sucursals"),
           this.GET_DATA("clientes"),
+          this.GET_DATA("metodos"),
         ]).then((v) => {
           this.marcas = v[0];
           this.categorias = v[1];
           this.articulos = v[2];
           this.sucursals = v[3];
           this.clientes = v[4];
+          this.metodos = v[5];
           if (this.sucursals.length > 0) {
             this.sucursal = this.sucursals[0];
           }
@@ -689,13 +733,15 @@ export default {
 
         const operacion = {
           total: this.totalCarrito,
-          tipo: 1,
+          tipo: this.comprobante_tipo,
           pago: 0,
           cambio: 0,
           motivo: "",
           cliente_id: this.cliente,
+          user_id: user.id,
           carrito: this.carrito,
           caja_id: this.user.caja_id,
+          metodo_id: this.metodo,
         };
         const res = await this.$api.$post("ventas", operacion);
         console.log(res);

@@ -19,7 +19,7 @@
                   <tbody>
                     <tr v-for="(m, i) in list" :key="m.id">
                       <td class="py-0 px-1">{{ i + 1 }}</td>
-                      <td class="py-0 px-1">{{ m.fecha }}</td>
+                      <td class="py-0 px-1">{{ formatDate(m.created_at) }}</td>
                       <td class="py-0 px-1">
                         {{ m.cliente.nombre }} {{ m.cliente.apePaterno }}
                       </td>
@@ -133,6 +133,10 @@ export default {
         sucursal
       );
       console.log(res);
+    },
+    formatDate(dateString) {
+      const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+      return new Date(dateString).toLocaleDateString("es-ES", options);
     },
   },
   mounted() {

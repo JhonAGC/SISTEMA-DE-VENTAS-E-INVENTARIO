@@ -12,6 +12,9 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::apiResource('/clientes', 'ClienteController');
     Route::apiResource('/proveedors', 'ProveedorController');
+    Route::apiResource('/metodos', 'MetodoController');
+    Route::apiResource('/boletas', 'BoletaController');
+    Route::apiResource('/facturas', 'FacturaController');
 
     Route::apiResource('/articulos', 'ArticuloController');
     Route::get('/inventarios/kardex/{articulo}', 'InventarioController@kardex');

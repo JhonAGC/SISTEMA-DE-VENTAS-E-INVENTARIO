@@ -12,6 +12,17 @@ class Venta extends Model
     {
         return $this->hasMany(VentaInventario::class);
     }
+
+    public function boletas()
+    {
+        return $this->hasMany(Boleta::class);
+    }
+
+    public function facturas()
+    {
+        return $this->hasMany(Factura::class);
+    }
+
     public function CajaVenta()
     {
         return $this->hasOne(CajaVenta::class);
@@ -24,5 +35,10 @@ class Venta extends Model
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Metodo()
+    {
+        return $this->belongsTo(Metodo::class);
     }
 }

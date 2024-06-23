@@ -1,424 +1,205 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style type="text/css">
-        html {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobante de Venta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            color: #333;
+            background-color: #fff;
         }
-
-        .bold,
-        b,
-        strong {
-            font-weight: 700
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
         }
-
-        body {
-            background-repeat: no-repeat;
-            background-position: center center;
-            text-align: center;
-            margin: 0;
-            font-family: Verdana, monospace
-        }
-
-        .tabla_borde {
-            border: 1px solid #666;
-            border-radius: 10px
-        }
-
-        tr.border_bottom td {
-            border-bottom: 1px solid #000
-        }
-
-        tr.border_top td {
-            border-top: 1px solid #666
-        }
-
-        td.border_right {
-            border-right: 1px solid #666
-        }
-
-        .table-valores-totales tbody>tr>td {
-            border: 0
-        }
-
-        .table-valores-totales>tbody>tr>td:first-child {
-            text-align: right
-        }
-
-        .table-valores-totales>tbody>tr>td:last-child {
-            border-bottom: 1px solid #666;
-            text-align: right;
-            width: 30%
-        }
-
-        hr,
-        img {
-            border: 0
-        }
-
-        table td {
-            font-size: 12px
-        }
-
-        html {
-            font-family: sans-serif;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            font-size: 10px;
-            -webkit-tap-highlight-color: transparent
-        }
-
-        a {
-            background-color: transparent
-        }
-
-        a:active,
-        a:hover {
-            outline: 0
-        }
-
-        img {
-            vertical-align: middle
-        }
-
-        hr {
-            height: 0;
-            -webkit-box-sizing: content-box;
-            -moz-box-sizing: content-box;
-            box-sizing: content-box;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border-top: 1px solid #eee
-        }
-
-        table {
-            border-spacing: 0;
-            border-collapse: collapse
-        }
-        /* @page { size: 360pt 360pt; } */
-        @media print {
-
-            blockquote,
-            img,
-            tr {
-                page-break-inside: avoid
-            }
-
-            *,
-            :after,
-            :before {
-                color: #000 !important;
-                text-shadow: none !important;
-                background: 0 0 !important;
-                -webkit-box-shadow: none !important;
-                box-shadow: none !important
-            }
-
-            a,
-            a:visited {
-                text-decoration: underline
-            }
-
-            a[href]:after {
-                content: " (" attr(href) ")"
-            }
-
-            blockquote {
-                border: 1px solid #999
-            }
-
-            img {
-                max-width: 100% !important
-            }
-
-            p {
-                orphans: 3;
-                widows: 3
-            }
-
-            .table {
-                border-collapse: collapse !important
-            }
-
-            .table td {
-                background-color: #fff !important
-            }
-        }
-
-        a,
-        a:focus,
-        a:hover {
-            text-decoration: none
-        }
-
-        *,
-        :after,
-        :before {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box
-        }
-
-        a {
-            color: #428bca;
-            cursor: pointer
-        }
-
-        a:focus,
-        a:hover {
-            color: #2a6496
-        }
-
-        a:focus {
-            outline: dotted thin;
-            outline: -webkit-focus-ring-color auto 5px;
-            outline-offset: -2px
-        }
-
-        h6 {
-            font-family: inherit;
-            line-height: 1.1;
-            color: inherit;
-            margin-top: 10px;
-            margin-bottom: 10px
-        }
-
-        p {
-            margin: 0 0 10px
-        }
-
-        blockquote {
-            padding: 10px 20px;
-            margin: 0 0 20px;
-            border-left: 5px solid #eee
-        }
-
-        table {
-            background-color: transparent
-        }
-
-        .table {
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 20px
-        }
-
-        h6 {
-            font-weight: 100;
-            font-size: 10px
-        }
-
-        body {
-            line-height: 1.42857143;
-            font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color: #2f4050;
-            font-size: 13px;
-            color: #676a6c;
-            overflow-x: hidden
-        }
-
-        .table>tbody>tr>td {
+        #header div{
             vertical-align: top;
-            border-top: 1px solid #e7eaec;
-            line-height: 1.42857;
-            padding: 5px
+            display: inline-block;
+            width: 45%;
+            
         }
-
-        .white-bg {
-            background-color: #fff
+        .header .title {
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            width: 40%; 
         }
-
-        td {
-            padding: 3
+        
+        .logo{
+            text-align: right ;
         }
-
-        .table-valores-totales tbody>tr>td {
-            border-top: 0 none !important
+        .header .logo img {
+            width: 100px;
+            
         }
-
-        tr {
-  page-break-inside: avoid;
-}
-body {
-  margin-top: .5in;
-}
+        .invoice-info {
+            margin-bottom: 20px;
+        }
+        .invoice-info h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .invoice-info p {
+            margin: 5px 0;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details h2 {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 2px solid #007BFF;
+            display: inline-block;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .details p strong {
+            display: inline-block;
+            width: 100px;
+        }
+        .items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .items th, .items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .items th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .totals {
+            width: 50%;
+            margin-left: 50%;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+        .totals table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .totals th, .totals td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .totals th {
+            background-color: #f1f1f1;
+        }
+        .totals tr:last-child th, .totals tr:last-child td {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer p {
+            margin: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 18px;
+        }
+        .footer .contact {
+            margin-top: 10px;
+        }
+        .footer .contact div {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            text-align: left;
+        }
     </style>
 </head>
-
-<body class="white-bg">
-
-    <table width="100%">
-        <tbody>
-            <tr>
-                <td style="padding:30px !important">
-                    <table width="100%" height="200px" border="0" aling="center" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td width="50%" height="0" align="center">
-
-                                    
-
-                                </td>
-                                <td width="5%" height="0" align="center"></td>
-                                <td width="45%" rowspan="" valign="bottom" style="padding-left:0">
-                                    <div class="tabla_borde">
-                                        <table width="100%" border="0" height="50" cellpadding="2" cellspacing="0">
-                                            <tbody>
-                                                <tr>
-                                                    <td align="center">
-                                                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:19px" text-align="center">V E N T A </span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td align="center">
-                                                        <span style="font-size:19px">N° {{$venta->id}} </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center">
-                                                        <span style="font-size:14px">Fecha de registro: {{$venta->fecha}} </span>
-                                                    </td>
-                                                </tr>
-                                               
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td valign="bottom" style="padding-left:0" colspan="3">
-                                    <div class="tabla_borde">
-                                        <table width="100%" height="0" border="0" border-radius="" cellpadding="9" cellspacing="0">
-                                            <tbody>
-                                                <tr>
-                                                    <td align="center" colspan="2">
-                                                        <strong><span style="font-size:15px">{{$venta->sucursal->nombre}}</span></strong>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="left">
-                                                        <strong>Cliente: </strong>{{$venta->cliente}}
-                                                    </td>
-                                                    <td align="left">
-                                                        <strong>Observacion: </strong>{{$venta->motivo}}
-                                                    </td>
-                                                </tr>
-                                              
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                           
-                        </tbody>
-                    </table>
-                   <br>
-                  
-                
-                        <div class="tabla_borde">
-                            <table width="100%" border="0" cellpadding="5" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        
-                                        <td align="center " colspan="6" class="bold">DETALLE DE VENTA</td>
-                                    </tr>
-                                    <tr class="border_top">
-
-                                        <td align="left" class="bold">N°</td>
-                                        <td align="left" class="bold">ARTICULO</td>
-                                        <td align="left" class="bold">CATEGORIA</td>
-                                        <td align="left" class="bold">CANTIDAD</td>
-                                        <td align="left" class="bold">PRECIO</td>
-                                        <td align="left" class="bold">TOTAL</td>
-                                       
-
-                                    </tr>
-                                        <?php
-                                        $n = 1;
-                                        foreach($venta->venta_inventarios as $d){
-                                                                           ?>
-                                        <tr class="border_top">
-                                            <td align="left">
-                                                {{$n}}
-                                            </td>
-                                            <td align="left">
-                                                {{$d->inventario->articulo->nombre}}
-                                            </td>
-                                            <td align="left">
-                                                {{$d->inventario->articulo->categoria->nombre}}
-                                            </td>
-                                            <td align="left">
-                                                {{$d->cantidad}}
-                                            </td>
-                                            <td align="left">
-                                            {{$d->precio}}
-                                            </td>
-                                            <td align="left">
-                                            {{$d->precio*$d->cantidad}}
-                                            </td>
-                                         
-
-                                        </tr>
-                                   <?php
-                                   $n++;
-                                    }
-                                   ?>
-                                   
-                                    <tr class="border_top">
-
-                                        <td align="left" class="bold" colspan="4">  </td>
-                                    
-                                        <td align="left" class="bold" > TOTAL </td>
-                                        <td align="left" class="bold" > {{$venta->total}} </td>
-                                       
-                                
-                                
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                
-                        <div class="tabla_borde">
-                            <table width="100%" border="0" cellpadding="5" cellspacing="0">
-                                <tbody>
-                                    <tr>
-
-
-                                        <td align="center " colspan="3" class="bold">INFORMACION</td>
-                                    </tr>
-                                    <tr class="border_top">
-
-                                        <td align="left" class="bold">Total de Venta: {{$venta->total}}</td>
-                                        <td align="left" class="bold">Recibido: {{$venta->pago}} </td>
-                                        <td align="left" class="bold">Cambio: {{$venta->cambio}}</td>
-                                       
-
-
-
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <br>
-                  
-
-
-
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
+<body>
+    <div class="container">
+        <div class="header" id="header">
+            <div class="title"><h2></h2>{{$venta->tipo==='B'?'BOLETA':'FACTURA'}}</div>
+            <div class="logo">
+                <img src="../resources/image/casa_micas.png" alt="Logo">
+            </div>
+        </div>
+        <div class="invoice-info">
+            <h2>{{ $venta->sucursal->nombre }}</h2>
+            <p><strong>{{$venta->tipo==='B'?'Boleta':'Factura'}} n.°:</strong> {{ $venta->tipo==='B'? $venta->boleta[0]->serie." - ".$venta->boleta[0]->correlativo :$venta->factura[0]->serie." - ".$venta->factura[0]->correlativo }}</p>
+            <p><strong>Fecha:</strong> {{ $venta->created_at->format('d/m/Y') }}</p>
+        </div>
+        <div class="details">
+            <div>
+                <h2>{{$venta->cliente->nombre." ".$venta->cliente->apePaterno." ".$venta->cliente->apeMaterno  }}</h2>
+                <p><strong>DNI:</strong>{{$venta->cliente->dni }}</p>
+            </div>
+        </div>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th>Artículo</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($venta->venta_inventarios as $index => $item)
+                    <tr>
+                        <td>{{ $item->inventario->articulo->nombre }}</td>
+                        <td>{{ number_format($item->cantidad, 2) }}</td>
+                        <td>{{ number_format($item->precio, 2) }}</td>
+                        <td>{{ number_format($item->cantidad * $item->precio, 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="totals">
+            <table>
+                <tr>
+                    <th>Subtotal:</th>
+                    <td>{{ number_format($venta->subtotal, 2) }}</td>
+                </tr>
+                <tr>
+                    <th>Impuestos (0%):</th>
+                    <td>{{ number_format($venta->impuestos, 2) }}</td>
+                </tr>
+                <tr>
+                    <th>Total:</th>
+                    <td>{{ number_format($venta->total, 2) }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer">
+            <p>¡Gracias por su compra!</p>
+            <div class="contact">
+                <div>
+                    <h2>Información de pago</h2>
+                    <p>{{$venta->cliente->nombre." ".$venta->cliente->apePaterno." ".$venta->cliente->apeMaterno  }}</p>
+                    <p>vendedor: {{$venta->user->nombre}}</p>
+                    <p>Cuenta: S/N</p>
+                    
+                </div>
+                <div>
+                    <h2>Contacto</h2>
+                    <p>Teléfono: {{$venta->sucursal->telefono}}</p>
+                    <p>Dirección: {{$venta->sucursal->direccion}}</p>
+                    <p>www.lacasademicas.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>

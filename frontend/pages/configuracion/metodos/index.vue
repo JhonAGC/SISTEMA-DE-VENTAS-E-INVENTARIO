@@ -9,31 +9,19 @@
               <i class="fas fa-plus"></i> Agregar
             </nuxtLink>
           </div>
-          <div class="col-12 overflow-auto flex-col">
+          <div class="col-12">
             <div class="card">
               <div class="card-body">
                 <table class="table">
                   <thead>
                     <th class="py-0 px-1">#</th>
                     <th class="py-0 px-1">NOMBRE</th>
-                    <th class="py-0 px-1">RUC</th>
-                    <th class="py-0 px-1">DIRECCION</th>
-                    <th class="py-0 px-1">TELEFONO</th>
-                    <th class="py-0 px-1">CORREO</th>
-                    <th class="py-0 px-1">WEB</th>
-                    <th class="py-0 px-1">OBSERVACIONES</th>
+                    <th class="py-0 px-1"></th>
                   </thead>
                   <tbody>
                     <tr v-for="(m, i) in list" :key="m.id">
                       <td class="py-0 px-1">{{ i + 1 }}</td>
                       <td class="py-0 px-1">{{ m.nombre }}</td>
-                      <td class="py-0 px-1">{{ m.ruc }}</td>
-                      <td class="py-0 px-1">{{ m.direccion }}</td>
-                      <td class="py-0 px-1">{{ m.telefono }}</td>
-                      <td class="py-0 px-1">{{ m.correo }}</td>
-                      <td class="py-0 px-1">{{ m.pagWeb }}</td>
-                      <td class="py-0 px-1">{{ m.observaciones }}</td>
-
                       <td class="py-0 px-1">
                         <div class="btn-group">
                           <nuxtLink
@@ -76,11 +64,11 @@ export default {
     return {
       load: true,
       list: [],
-      apiUrl: "proveedors",
-      page: "Proveedores",
-      modulo: "Proveedor",
-      url_nuevo: "/proveedor/nuevo",
-      url_editar: "/proveedor/editar/",
+      apiUrl: "metodos",
+      page: "Configuracion",
+      modulo: "Metodos",
+      url_nuevo: "/configuracion/metodos/nuevo",
+      url_editar: "/configuracion/metodos/editar/",
     };
   },
   methods: {
